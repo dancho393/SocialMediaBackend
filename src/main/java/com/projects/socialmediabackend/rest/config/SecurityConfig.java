@@ -33,8 +33,6 @@ public class SecurityConfig {
                                 .anyRequest()
                                 .authenticated()
                 )
-                .oauth2Login(Customizer.withDefaults())
-                .formLogin(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
