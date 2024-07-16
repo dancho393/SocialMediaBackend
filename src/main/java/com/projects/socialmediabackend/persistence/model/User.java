@@ -1,5 +1,6 @@
 package com.projects.socialmediabackend.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projects.socialmediabackend.persistence.model.enums.user.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,6 +24,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String username;
+    @JsonIgnore
     private String password;
     private String firstName;
     private String lastName;
