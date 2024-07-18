@@ -1,5 +1,6 @@
 package com.projects.socialmediabackend.persistence.model;
 
+import com.projects.socialmediabackend.persistence.model.enums.message.MessageStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -29,5 +30,9 @@ public class Message {
     @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
     @JoinColumn(name = "chat_id", nullable = false)
     private Chat chat;
+
+    @Enumerated(EnumType.STRING)
+    private MessageStatus status;
+
 
 }
