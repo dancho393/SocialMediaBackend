@@ -2,6 +2,9 @@ package com.projects.socialmediabackend.persistence.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.security.Timestamp;
 
 import java.util.UUID;
 
@@ -16,14 +19,15 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
     private String message;
-    @ManyToOne
-    private User sender;
+    @CreationTimestamp
+    private Timestamp sentAt;
 
-    @ManyToOne
-    private User receiver;
+    private String senderId;
+    private String receiverId;
 
-
+    @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
+    @JoinColumn(name = "chat_id", nullable = false)
+    private Chat chat;
 
 }
