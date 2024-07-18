@@ -19,6 +19,7 @@ public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     private String user1Id;
     private String user2Id;
 
