@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.security.Timestamp;
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @Table(name = "messages")
@@ -27,7 +27,7 @@ public class Message {
     private String senderId;
     private String receiverId;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
+    @ManyToOne( optional = false)
     @JoinColumn(name = "chat_id", nullable = false)
     private Chat chat;
 

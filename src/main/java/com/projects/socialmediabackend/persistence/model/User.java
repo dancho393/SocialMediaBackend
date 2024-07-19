@@ -1,5 +1,6 @@
 package com.projects.socialmediabackend.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projects.socialmediabackend.persistence.model.enums.user.Role;
 import jakarta.persistence.*;
@@ -35,21 +36,23 @@ public class User implements UserDetails {
     private Role role;
 
 
-
-    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private Set<Chat> chats = new HashSet<>();
-
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    //@JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_users",
             joinColumns = @JoinColumn(name = "user_1_id"),
             inverseJoinColumns = @JoinColumn(name = "users_2_id"))
     private Set<User> friends = new HashSet<>();
 
-    @OneToMany(mappedBy = "toUser", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @JsonIgnore
+    @OneToMany(mappedBy = "toUser", orphanRemoval = true,fetch = FetchType.EAGER)
     private Set<FriendRequest> friendRequests = new HashSet<>();
 
-    @OneToMany(mappedBy = "fromUser", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @JsonIgnore
+    @OneToMany(mappedBy = "fromUser", orphanRemoval = true,fetch = FetchType.EAGER)
     private Set<FriendRequest> sentRequests = new HashSet<>();
 
 

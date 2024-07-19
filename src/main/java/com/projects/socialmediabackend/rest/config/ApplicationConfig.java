@@ -1,7 +1,8 @@
 package com.projects.socialmediabackend.rest.config;
 
 import com.projects.socialmediabackend.persistence.repository.UserRepository;
-import com.projects.socialmediabackend.rest.exception.UserNotFoundException;
+
+import com.projects.socialmediabackend.rest.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +21,7 @@ public class ApplicationConfig {
     @Bean
     public UserDetailsService userDetailsService(){
         return  username -> userRepository.findByUsernameIgnoreCase(username)
-                .orElseThrow(()-> new UserNotFoundException("User Not Found"));
+                .orElseThrow(()-> new EntityNotFoundException("User Not Found"));
     }
     @Bean
     public AuthenticationProvider authenticationProvider(){

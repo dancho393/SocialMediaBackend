@@ -23,7 +23,7 @@ public class Chat {
     private String user1Id;
     private String user2Id;
 
-    @OneToMany(mappedBy = "chat", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "chat", orphanRemoval = true)
     @OrderBy("sentAt ASC")
     private List<Message> messages = new ArrayList<>();
 

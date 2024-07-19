@@ -7,7 +7,8 @@ import com.projects.socialmediabackend.api.user.login.UserLoginResponse;
 import com.projects.socialmediabackend.core.jwt.JwtService;
 import com.projects.socialmediabackend.persistence.model.User;
 import com.projects.socialmediabackend.persistence.repository.UserRepository;
-import com.projects.socialmediabackend.rest.exception.UserNotFoundException;
+
+import com.projects.socialmediabackend.rest.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,7 +31,7 @@ public class UserLogInService implements UserLogInOperation {
         User user = userRepository.
                 findByUsernameIgnoreCase(
                         request.getUsername())
-                .orElseThrow(()-> new UserNotFoundException("USER WAS NOT FOUND"));
+                .orElseThrow(()-> new EntityNotFoundException("USER WAS NOT FOUND"));
         String jwtToken = jwtService.generateToken(user);
         return UserLoginResponse
                 .builder()
