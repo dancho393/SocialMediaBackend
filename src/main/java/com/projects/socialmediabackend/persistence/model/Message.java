@@ -3,10 +3,9 @@ package com.projects.socialmediabackend.persistence.model;
 import com.projects.socialmediabackend.persistence.model.enums.message.MessageStatus;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
-
-import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Table(name = "messages")
@@ -21,8 +20,9 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String message;
-    @CreationTimestamp
-    private Timestamp sentAt;
+
+
+    private Instant sentAt;
 
     private String senderId;
     private String receiverId;
@@ -33,6 +33,8 @@ public class Message {
 
     @Enumerated(EnumType.STRING)
     private MessageStatus status;
+
+    private boolean isArchived;
 
 
 }
