@@ -10,9 +10,11 @@ import com.projects.socialmediabackend.persistence.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 @RequiredArgsConstructor
 @Service
+@Validated
 public class UserRegisterService implements UserRegisterOperation {
     private final UserRepository userRepository;
     private final UserMapper userMapper;

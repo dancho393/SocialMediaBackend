@@ -1,17 +1,14 @@
-package com.projects.socialmediabackend.api.user.login;
+package com.projects.socialmediabackend.api.refreshtoken;
 
 import com.projects.socialmediabackend.api.base.OperationResponse;
 import lombok.*;
-
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserLoginResponse implements OperationResponse {
-    @NonNull
+public class RefreshTokenResponse implements OperationResponse {
     private String jwtToken;
-    @NonNull
     private String refreshToken;
 }

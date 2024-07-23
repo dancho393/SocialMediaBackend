@@ -1,19 +1,20 @@
 package com.projects.socialmediabackend.api.user.register;
 
 import com.projects.socialmediabackend.api.base.OperationRequest;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class UserRegisterRequest implements OperationRequest {
-
     @NotEmpty(message = "Username is required")
     @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
     private String username;
@@ -35,7 +36,7 @@ public class UserRegisterRequest implements OperationRequest {
     private String email;
 
     @NotEmpty(message = "Phone number is required")
-    @Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits")
+    @Pattern(regexp = "\\d{13}", message = "Phone number must be 12 digits")
     private String phone;
 
     @Size(max = 100, message = "Address cannot be more than 100 characters")

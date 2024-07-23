@@ -1,10 +1,11 @@
 package com.projects.socialmediabackend.api.user.login;
 
 import com.projects.socialmediabackend.api.base.OperationRequest;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+
 
 @Getter
 @Setter

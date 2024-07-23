@@ -10,4 +10,5 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class CreateMessageResponse implements OperationResponse {
+    private String message;
 }

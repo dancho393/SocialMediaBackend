@@ -11,7 +11,6 @@ import com.projects.socialmediabackend.api.friendrequest.reject.RejectFriendRequ
 import com.projects.socialmediabackend.api.friendrequest.reject.RejectFriendRequestOutput;
 import com.projects.socialmediabackend.persistence.model.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,7 @@ public class FriendRequestController {
     private final CreateFriendRequestOperation createFriendRequestOperation;
     private final AcceptFriendRequestOperation acceptFriendRequestOperation;
     private final RejectFriendRequestOperation rejectFriendRequestOperation;
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<CreateFriendRequestOutput> createFriendRequest(
             @RequestBody CreateFriendRequestInput request,
             @AuthenticationPrincipal User fromUser) {
