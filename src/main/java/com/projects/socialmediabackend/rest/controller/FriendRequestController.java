@@ -46,4 +46,5 @@ public class FriendRequestController {
         return ResponseEntity.ok(rejectFriendRequestOperation.process(request));
     }
 
+
 }
