@@ -1,8 +1,7 @@
-package com.projects.socialmediabackend.api.friendrequest.create;
+package com.projects.socialmediabackend.api.friendrequest.getforuser;
 
 import com.projects.socialmediabackend.api.base.OperationRequest;
 import com.projects.socialmediabackend.persistence.model.User;
-
 import lombok.*;
 
 @Getter
@@ -10,7 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CreateFriendRequestInput implements OperationRequest {
-    private User fromUser;
-    private String toUser;
+public class GetFriendRequestsForUserInput implements OperationRequest {
+    private User user;
 }

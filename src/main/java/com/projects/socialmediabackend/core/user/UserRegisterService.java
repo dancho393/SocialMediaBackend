@@ -23,6 +23,7 @@ public class UserRegisterService implements UserRegisterOperation {
     public UserRegisterResponse process(UserRegisterRequest request) {
         User user = userMapper.fromRequestToUser(request);
         user.setRole(Role.User);
+        user.setPictureURL(null);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         userRepository.save(user);
         return userMapper.toUserRegisterResponse(user);

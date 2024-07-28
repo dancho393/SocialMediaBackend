@@ -6,6 +6,9 @@ import com.projects.socialmediabackend.api.friendrequest.accept.AcceptFriendRequ
 import com.projects.socialmediabackend.api.friendrequest.create.CreateFriendRequestInput;
 import com.projects.socialmediabackend.api.friendrequest.create.CreateFriendRequestOperation;
 import com.projects.socialmediabackend.api.friendrequest.create.CreateFriendRequestOutput;
+import com.projects.socialmediabackend.api.friendrequest.getforuser.GetFriendRequestsForUserInput;
+import com.projects.socialmediabackend.api.friendrequest.getforuser.GetFriendRequestsForUserOperation;
+import com.projects.socialmediabackend.api.friendrequest.getforuser.GetFriendRequestsForUserOutput;
 import com.projects.socialmediabackend.api.friendrequest.reject.RejectFriendRequestInput;
 import com.projects.socialmediabackend.api.friendrequest.reject.RejectFriendRequestOperation;
 import com.projects.socialmediabackend.api.friendrequest.reject.RejectFriendRequestOutput;
@@ -22,6 +25,7 @@ public class FriendRequestController {
     private final CreateFriendRequestOperation createFriendRequestOperation;
     private final AcceptFriendRequestOperation acceptFriendRequestOperation;
     private final RejectFriendRequestOperation rejectFriendRequestOperation;
+    private final GetFriendRequestsForUserOperation getFriendRequestsForUserOperation;
     @PostMapping
     public ResponseEntity<CreateFriendRequestOutput> createFriendRequest(
             @RequestBody CreateFriendRequestInput request,
@@ -46,5 +50,12 @@ public class FriendRequestController {
         return ResponseEntity.ok(rejectFriendRequestOperation.process(request));
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<GetFriendRequestsForUserOutput> getFriendRequestsForUser(
+            @AuthenticationPrincipal User user
+    ){
+        GetFriendRequestsForUserInput request = new GetFriendRequestsForUserInput(user);
+        return ResponseEntity.ok(getFriendRequestsForUserOperation.process(request));
+    }
 
 }

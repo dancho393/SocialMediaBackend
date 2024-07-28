@@ -34,8 +34,10 @@ public class User implements UserDetails {
     private String phone;
     private String address;
     private String city;
+    private String pictureURL;
     @Enumerated(EnumType.STRING)
     private Role role;
+
 
 
     @JsonIgnore
