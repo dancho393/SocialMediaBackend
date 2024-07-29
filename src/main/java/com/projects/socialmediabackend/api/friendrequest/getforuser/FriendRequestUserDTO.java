@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class FriendRequestUserDTO {
+    private String requestId;
     private String username;
     private String firstName;
     private String lastName;

@@ -19,6 +19,7 @@ public interface FriendRequestMapper {
     @Mapping(source = "fromUser.lastName", target = "lastName")
     @Mapping(source = "fromUser.city", target = "city")
     @Mapping(source = "fromUser.pictureURL", target = "pictureURL")
+    @Mapping(source = "id",target = "requestId")
     FriendRequestUserDTO toFriendRequestUserDTO(FriendRequest friendRequest);
 
     List<FriendRequestUserDTO> toFriendRequestUserDTOList(List<FriendRequest> friendRequestList);

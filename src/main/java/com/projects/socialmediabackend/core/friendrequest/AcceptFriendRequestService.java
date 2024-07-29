@@ -22,9 +22,13 @@ public class AcceptFriendRequestService implements AcceptFriendRequestOperation 
 
     @Override
     public AcceptFriendRequestOutput process(AcceptFriendRequestInput request) {
-        FriendRequest friendRequest = friendRequestRepository.findById(UUID.fromString(request.getFriendRequestId()))
-                .orElseThrow(() ->new EntityNotFoundException("FriendRequest Not Found With Id:"+request.getFriendRequestId()));
-        if(request.getLoggedUser().equals(friendRequest.getToUser())&&friendRequest.getStatus().equals(FriendRequestStatus.Waiting)) {
+        FriendRequest friendRequest =
+                friendRequestRepository.findById(UUID.fromString(request.getFriendRequestId()))
+                .orElseThrow(
+                        () ->new EntityNotFoundException(
+                                "FriendRequest Not Found With Id:"+request.getFriendRequestId()));
+        if(request.getLoggedUser().equals(friendRequest.getToUser())
+                &&friendRequest.getStatus().equals(FriendRequestStatus.Waiting)) {
 
             friendRequest.setStatus(FriendRequestStatus.Accepted);
             friendRequestRepository.save(friendRequest);
@@ -33,8 +37,8 @@ public class AcceptFriendRequestService implements AcceptFriendRequestOperation 
             toUser.getFriendRequests().add(friendRequest);
             fromUser.getFriendRequests().add(friendRequest);
 
-            userRepository.save(friendRequest.getToUser());
-            userRepository.save(friendRequest.getFromUser());
+            userRepository.save(toUser);
+            userRepository.save(fromUser);
             return AcceptFriendRequestOutput.builder()
                     .message("Accepted friend request")
                     .friendRequest(friendRequest)

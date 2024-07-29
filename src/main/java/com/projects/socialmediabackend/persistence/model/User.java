@@ -44,7 +44,7 @@ public class User implements UserDetails {
     @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private Set<Chat> chats = new HashSet<>();
-    @JsonIgnore
+   // @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_users",
             joinColumns = @JoinColumn(name = "user_1_id"),
