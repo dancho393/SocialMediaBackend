@@ -5,6 +5,7 @@ import com.projects.socialmediabackend.api.friendrequest.getforuser.GetFriendReq
 import com.projects.socialmediabackend.api.friendrequest.getforuser.GetFriendRequestsForUserOutput;
 import com.projects.socialmediabackend.api.mapper.FriendRequestMapper;
 import com.projects.socialmediabackend.persistence.model.FriendRequest;
+import com.projects.socialmediabackend.persistence.model.enums.friendrequest.FriendRequestStatus;
 import com.projects.socialmediabackend.persistence.repository.FriendRequestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,10 @@ public class GetFriendsRequestsForUserService implements GetFriendRequestsForUse
     @Override
     public GetFriendRequestsForUserOutput process(GetFriendRequestsForUserInput request) {
         List<FriendRequest> friendRequests =
-                friendRequestRepository.findAllByToUser(request.getUser());
+                friendRequestRepository
+                        .findAllByToUserAndStatus(
+                                request.getUser(),
+                                FriendRequestStatus.Waiting);
 
 
         return  GetFriendRequestsForUserOutput
