@@ -9,9 +9,12 @@ import com.projects.socialmediabackend.persistence.model.enums.friendrequest.Fri
 import com.projects.socialmediabackend.persistence.repository.FriendRequestRepository;
 import com.projects.socialmediabackend.persistence.repository.UserRepository;
 import com.projects.socialmediabackend.rest.exception.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -21,6 +24,7 @@ public class AcceptFriendRequestService implements AcceptFriendRequestOperation 
     private final UserRepository userRepository;
 
     @Override
+    @Transactional
     public AcceptFriendRequestOutput process(AcceptFriendRequestInput request) {
         FriendRequest friendRequest =
                 friendRequestRepository.findById(UUID.fromString(request.getFriendRequestId()))
@@ -32,13 +36,20 @@ public class AcceptFriendRequestService implements AcceptFriendRequestOperation 
 
             friendRequest.setStatus(FriendRequestStatus.Accepted);
             friendRequestRepository.save(friendRequest);
+
             User toUser=friendRequest.getToUser();
             User fromUser=friendRequest.getFromUser();
-            toUser.getFriendRequests().add(friendRequest);
-            fromUser.getFriendRequests().add(friendRequest);
 
+            Set<User> friends1 = toUser.getFriends();
+            friends1.add(fromUser);
+            toUser.setFriends(friends1);
             userRepository.save(toUser);
+
+            Set<User> friends2 = fromUser.getFriends();
+            friends2.add(toUser);
+            fromUser.setFriends(friends2);
             userRepository.save(fromUser);
+
             return AcceptFriendRequestOutput.builder()
                     .message("Accepted friend request")
                     .friendRequest(friendRequest)

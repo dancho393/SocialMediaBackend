@@ -2,6 +2,7 @@ package com.projects.socialmediabackend.persistence.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projects.socialmediabackend.persistence.model.enums.user.Role;
+import com.projects.socialmediabackend.persistence.model.enums.user.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
@@ -35,8 +36,12 @@ public class User implements UserDetails {
     private String address;
     private String city;
     private String pictureURL;
+
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 
 
 
@@ -44,7 +49,7 @@ public class User implements UserDetails {
     @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private Set<Chat> chats = new HashSet<>();
-   // @JsonIgnore
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_users",
             joinColumns = @JoinColumn(name = "user_1_id"),

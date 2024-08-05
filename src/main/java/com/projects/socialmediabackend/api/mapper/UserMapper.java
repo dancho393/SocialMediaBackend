@@ -1,6 +1,7 @@
 package com.projects.socialmediabackend.api.mapper;
 
 import com.projects.socialmediabackend.api.user.getall.GetAllUsersDTO;
+import com.projects.socialmediabackend.api.user.getallfriends.GetAllFriendsUserDTO;
 import com.projects.socialmediabackend.api.user.register.UserRegisterRequest;
 import com.projects.socialmediabackend.api.user.register.UserRegisterResponse;
 import com.projects.socialmediabackend.persistence.model.User;
@@ -9,6 +10,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Mapper(componentModel = "spring")
@@ -42,4 +44,13 @@ public interface UserMapper {
     @Mapping(target = "address")
     @Mapping(target = "city")
     GetAllUsersDTO fromUserToGetAllUsersDTO(User user);
+
+    @Mapping(target = "id")
+    @Mapping(target = "firstName")
+    @Mapping(target = "lastName")
+    @Mapping(target = "pictureURL")
+    @Mapping(target = "status",source = "status")
+    GetAllFriendsUserDTO fromUserToGetAllFriendsUserDTO(User user);
+
+    Set<GetAllFriendsUserDTO> fromUserToGetAllFriendsUserDTOSet(Set<User> users);
 }
