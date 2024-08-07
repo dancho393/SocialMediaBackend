@@ -52,5 +52,5 @@ public interface UserMapper {
     @Mapping(target = "status",source = "status")
     GetAllFriendsUserDTO fromUserToGetAllFriendsUserDTO(User user);
 
-    Set<GetAllFriendsUserDTO> fromUserToGetAllFriendsUserDTOSet(Set<User> users);
+    List<GetAllFriendsUserDTO> fromUserToGetAllFriendsUserDTOSet(Set<User> users);
 }

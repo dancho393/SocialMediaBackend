@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/friend-requests")
+@RequestMapping("/api/v1/authenticated/friend-requests")
 @CrossOrigin(origins = "*")
 
 public class FriendRequestController {

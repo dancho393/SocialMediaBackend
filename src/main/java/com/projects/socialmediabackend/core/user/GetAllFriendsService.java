@@ -14,7 +14,6 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Service
 public class GetAllFriendsService implements GetAllFriendsOperation {
-    private final UserRepository userRepository;
     private final UserMapper userMapper;
     @Override
     public GetAllFriendsResponse process(GetAllFriendsRequest request) {

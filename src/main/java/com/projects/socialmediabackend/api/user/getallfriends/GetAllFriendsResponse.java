@@ -3,7 +3,8 @@ package com.projects.socialmediabackend.api.user.getallfriends;
 import com.projects.socialmediabackend.api.base.OperationResponse;
 import lombok.*;
 
-import java.util.Set;
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -11,5 +12,5 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 public class GetAllFriendsResponse implements OperationResponse {
-    private Set<GetAllFriendsUserDTO> friends;
+    private List<GetAllFriendsUserDTO> friends;
 }
