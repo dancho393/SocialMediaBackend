@@ -31,8 +31,9 @@ public class WebSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws IOException {
 
-        System.out.println("Connection Established");
+
         String username = session.getAttributes().get("username").toString();
+        System.out.println("Connection Established For User:"+ username);
         changeUserStatusOnlineOperation
                 .process(
                         buildChangeUserOnlineRequest(username));
@@ -49,7 +50,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
         changeUserStatusOfflineOperation
                 .process(
                         buildChangeUserOfflineRequest(username));
-        System.out.println("Connection Unestablished");
+        System.out.println("Connection Unestablished For User: "+username);
     }
     private ChangeUserStatusOfflineRequest buildChangeUserOfflineRequest(String username){
         return new ChangeUserStatusOfflineRequest(username);
